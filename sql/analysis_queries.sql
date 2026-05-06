@@ -145,3 +145,16 @@ From Batting
 Group by Playername
 Order BY BestAverage Desc
 Limit 10 ;
+
+--Complete Data of first 20 run scorers
+Select Playername ,
+	Sum(Runs) as Runs,
+	Avg(Runs) as BestAverage,
+        Count(*) as innings,
+        Round(Avg(StrikeRate) , 2) as Strike_Rate
+From Batting
+Group by Playername
+Having Strike_Rate >100 AND innings >= 10
+Order BY Runs DESC
+Limit 20;
+
