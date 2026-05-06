@@ -38,6 +38,36 @@ Where Won_by = 'Runs'
 Group by match_winner
 Order by wins DESC;
 
+--Player with most number of Man of the Match awards
+Select player_of_the_match,
+	Count(*) as Most_POTM
+From matchresults
+Group by player_of_the_match
+Order By Most_POTM Desc;
+
+--Chasing Freindly Venues
+Select distinct venue,
+	Count(*) as ChasingFriendly
+From matchresults
+Where won_by = 'Wickets'
+Group by Venue
+Order By ChasingFriendly Desc;
+
+--Defending Friendly Venues
+Select distinct venue,
+	Count(*) as DefendingFriendly
+From matchresults
+Where won_by = 'Runs'
+Group by Venue
+Order By ChasingFriendly Desc;
+
+--Chasing Vs Defending Wins
+Select Won_by , 
+	Count(*) as Wins
+From matchresults
+Group by Won_by
+Order By Wins Desc;
+
 --Batting Analysis
 
 -- Top run scorers
@@ -101,3 +131,17 @@ Select InningsNo,
 	Sum(Runs) as TotalRuns
 From Batting
 Group by InningsNo;
+
+--Highest Scorer of one match of the tournament
+SELECT PlayerName, MAX(Runs) AS HighestRuns
+FROM batting    
+GROUP BY PlayerName
+ORDER BY HighestRuns DESC
+
+--Best Average
+Select Playername ,
+	Avg(Runs) as BestAverage
+From Batting
+Group by Playername
+Order BY BestAverage Desc
+Limit 10 ;
