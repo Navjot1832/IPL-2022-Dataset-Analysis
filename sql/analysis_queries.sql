@@ -1,3 +1,45 @@
+--Teams Analysis
+
+--Top Teams by Wins
+Select Match_Winner ,
+	Count(*) AS Wins
+From matchresults
+Group By Match_Winner
+Order By Wins DESC;
+
+--Team who won most number of matches after winning toss
+SELECT match_winner ,
+	Count(*) As wins
+From matchresults
+Where match_winner = toss_winner
+Group by match_winner
+Order By wins DESC;
+
+--Team who won most number of tosses
+Select Toss_winner,
+	Count(*) as Tosswins
+From matchresults
+Group By Toss_winner
+Order by Tosswins DESC;
+
+--Team who won most number of matches while chasing
+Select Match_winner,
+	Count(*) as wins
+From matchresults
+Where Won_by = 'wickets'
+Group by match_winner
+Order by wins DESC;
+
+--Team who won most number of matches while defending
+Select Match_winner,
+	Count(*) as wins
+From matchresults
+Where Won_by = 'Runs'
+Group by match_winner
+Order by wins DESC;
+
+--Batting Analysis
+
 -- Top run scorers
 SELECT PlayerName ,
        SUM(Runs) AS TotalRuns
